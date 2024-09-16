@@ -117,6 +117,96 @@ export default class ProjectsSection {
         ],
       },
       {
+        name: "Madbox",
+        imageSources: [
+          "./models/projects/madbox/1.png",
+          "./models/projects/madbox/2.png",
+          "./models/projects/madbox/3.png",
+          "./models/projects/madbox/4.png",
+        ],
+        floorTexture: this.resources.items.projectsMadboxFloorTexture,
+        link: {
+          href: "https://ahao-chat.pages.dev/",
+          x: -4.8,
+          y: -4,
+          halfExtents: {
+            x: 3.2,
+            y: 1.5,
+          },
+        },
+        distinctions: [
+          { type: "awwwards", x: 3.95, y: 4.15 },
+          { type: "fwa", x: 5.6, y: 4.15 },
+        ],
+      },
+      {
+        name: "Scout",
+        imageSources: [
+          "./models/projects/scout/1.png",
+          "./models/projects/scout/2.png",
+          "./models/projects/scout/3.png",
+          "./models/projects/scout/4.png",
+        ],
+        floorTexture: this.resources.items.projectsScoutFloorTexture,
+        link: {
+          href: "https://mappin-6au.pages.dev/",
+          x: -4.8,
+          y: -2,
+          halfExtents: {
+            x: 3.2,
+            y: 1.5,
+          },
+        },
+        distinctions: [],
+      },
+      {
+        name: "orano",
+        imageSources: [
+          "./models/projects/orano/1.png",
+          "./models/projects/orano/2.png",
+          "./models/projects/orano/3.png",
+          "./models/projects/orano/4.png",
+        ],
+        floorTexture: this.resources.items.projectsOranoFloorTexture,
+        link: {
+          href: "https://weather-app-4v8.pages.dev/",
+          x: -4.8,
+          y: -3.4,
+          halfExtents: {
+            x: 3.2,
+            y: 1.5,
+          },
+        },
+        distinctions: [
+          { type: "awwwards", x: 3.95, y: 4.15 },
+          { type: "fwa", x: 5.6, y: 4.15 },
+          { type: "cssda", x: 7.2, y: 4.15 },
+        ],
+      },
+      {
+        name: "Luni.app",
+        imageSources: [
+          "./models/projects/luni/jvke1.png",
+          "./models/projects/luni/jvke2.png",
+          "./models/projects/luni/jvke3.png",
+          "./models/projects/luni/jvke4.png",
+        ],
+        floorTexture: this.resources.items.projectsLuniFloorTexture,
+        link: {
+          href: "#",
+          x: -4.8,
+          y: -3,
+          halfExtents: {
+            x: 3.2,
+            y: 1.5,
+          },
+        },
+        distinctions: [
+          { type: "awwwards", x: 3.95, y: 4.15 },
+          { type: "fwa", x: 5.6, y: 4.15 },
+        ],
+      },
+      {
         name: "Bonhomme | 10 ans",
         imageSources: [
           "./models/projects/bonhomme10ans/2.png",
@@ -139,72 +229,7 @@ export default class ProjectsSection {
           { type: "fwa", x: 5.6, y: 4.15 },
         ],
       },
-      {
-        name: "Luni.app",
-        imageSources: [
-          "./models/projects/luni/jvke1.jpg",
-          "./models/projects/luni/jvke2.jpg",
-          "./models/projects/luni/jvke3.jpg",
-          "./models/projects/luni/jvke4.jpg",
-        ],
-        floorTexture: this.resources.items.projectsLuniFloorTexture,
-        link: {
-          href: "#",
-          x: -4.8,
-          y: -3,
-          halfExtents: {
-            x: 3.2,
-            y: 1.5,
-          },
-        },
-        distinctions: [
-          { type: "awwwards", x: 3.95, y: 4.15 },
-          { type: "fwa", x: 5.6, y: 4.15 },
-        ],
-      },
-      {
-        name: "Madbox",
-        imageSources: [
-          "./models/projects/madbox/1.webp",
-          "./models/projects/madbox/2.webp",
-          "./models/projects/madbox/3.webp",
-          "./models/projects/madbox/4.webp",
-        ],
-        floorTexture: this.resources.items.projectsMadboxFloorTexture,
-        link: {
-          href: "#",
-          x: -4.8,
-          y: -4,
-          halfExtents: {
-            x: 3.2,
-            y: 1.5,
-          },
-        },
-        distinctions: [
-          { type: "awwwards", x: 3.95, y: 4.15 },
-          { type: "fwa", x: 5.6, y: 4.15 },
-        ],
-      },
-      {
-        name: "Scout",
-        imageSources: [
-          "./models/projects/scout/1.webp",
-          "./models/projects/scout/2.webp",
-          "./models/projects/scout/3.webp",
-          "./models/projects/scout/4.webp",
-        ],
-        floorTexture: this.resources.items.projectsScoutFloorTexture,
-        link: {
-          href: "#",
-          x: -4.8,
-          y: -2,
-          halfExtents: {
-            x: 3.2,
-            y: 1.5,
-          },
-        },
-        distinctions: [],
-      },
+
       // {
       //     name: 'Zenly',
       //     imageSources:
@@ -259,33 +284,7 @@ export default class ProjectsSection {
       //         { type: 'cssda', x: 7.2, y: 4.15 }
       //     ]
       // },
-      // {
-      //     name: 'orano',
-      //     imageSources:
-      //     [
-      //         './models/projects/orano/slideA.jpg',
-      //         './models/projects/orano/slideB.jpg',
-      //         './models/projects/orano/slideC.jpg'
-      //     ],
-      //     floorTexture: this.resources.items.projectsOranoFloorTexture,
-      //     link:
-      //     {
-      //         href: 'https://orano.imm-g-prod.com/experience/innovation/en',
-      //         x: - 4.8,
-      //         y: - 3.4,
-      //         halfExtents:
-      //         {
-      //             x: 3.2,
-      //             y: 1.5
-      //         }
-      //     },
-      //     distinctions:
-      //     [
-      //         { type: 'awwwards', x: 3.95, y: 4.15 },
-      //         { type: 'fwa', x: 5.6, y: 4.15 },
-      //         { type: 'cssda', x: 7.2, y: 4.15 }
-      //     ]
-      // },
+
       // {
       //     name: 'citrixRedbull',
       //     imageSources:

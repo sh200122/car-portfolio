@@ -184,7 +184,7 @@ export default class Resources extends EventEmitter {
       },
       {
         name: "projectsLuniFloor",
-        source: "./models/projects/luni/floorTexture.webp",
+        source: "./models/projects/luni/1.png",
         type: "texture",
       },
       {
@@ -199,12 +199,12 @@ export default class Resources extends EventEmitter {
       },
       {
         name: "projectsMadboxFloor",
-        source: "./models/projects/madbox/floorTexture.png",
+        source: "./models/projects/madbox/5.png",
         type: "texture",
       },
       {
         name: "projectsScoutFloor",
-        source: "./models/projects/scout/floorTexture.png",
+        source: "./models/projects/scout/5.png",
         type: "texture",
       },
       {
@@ -224,7 +224,7 @@ export default class Resources extends EventEmitter {
       },
       {
         name: "projectsOranoFloor",
-        source: "./models/projects/orano/floorTexture.png",
+        source: "./models/projects/orano/5.png",
         type: "texture",
       },
       // Information
