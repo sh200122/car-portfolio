@@ -73,6 +73,30 @@ export default class ProjectsSection {
   setList() {
     this.list = [
       {
+        name: "citrixRedbull",
+        imageSources: [
+          "./models/projects/citrixRedbull/1.png",
+          "./models/projects/citrixRedbull/2.png",
+          "./models/projects/citrixRedbull/4.png",
+          "./models/projects/citrixRedbull/5.png",
+        ],
+        floorTexture: this.resources.items.projectsCitrixRedbullFloorTexture,
+        link: {
+          href: "https://ahao-gpt.pages.dev/",
+          x: -4.8,
+          y: -4.4,
+          halfExtents: {
+            x: 3.2,
+            y: 1.5,
+          },
+        },
+        distinctions: [
+          { type: "awwwards", x: 3.95, y: 4.15 },
+          { type: "fwa", x: 5.6, y: 4.15 },
+          { type: "cssda", x: 7.2, y: 4.15 },
+        ],
+      },
+      {
         name: "Three.js Journey",
         imageSources: [
           "./models/projects/threejsJourney/slideA.webp",
@@ -229,33 +253,30 @@ export default class ProjectsSection {
           { type: "fwa", x: 5.6, y: 4.15 },
         ],
       },
-
       // {
-      //     name: 'Zenly',
-      //     imageSources:
-      //     [
-      //         './models/projects/zenly/slideA.jpg',
-      //         './models/projects/zenly/slideB.jpg',
-      //         './models/projects/zenly/slideC.jpg'
-      //     ],
-      //     floorTexture: this.resources.items.projectsZenlyFloorTexture,
-      //     link:
-      //     {
-      //         href: 'https://zen.ly',
-      //         x: - 4.8,
-      //         y: - 4.2,
-      //         halfExtents:
-      //         {
-      //             x: 3.2,
-      //             y: 1.5
-      //         }
+      //   name: "Zenly",
+      //   imageSources: [
+      //     "./models/projects/zenly/1.png",
+      //     "./models/projects/zenly/2.png",
+      //     "./models/projects/zenly/3.png",
+      //     "./models/projects/zenly/4.png",
+      //     "./models/projects/zenly/5.png",
+      //   ],
+      //   floorTexture: this.resources.items.projectsZenlyFloorTexture,
+      //   link: {
+      //     href: "https://ahao-gpt.pages.dev/",
+      //     x: -4.8,
+      //     y: -4.2,
+      //     halfExtents: {
+      //       x: 3.2,
+      //       y: 1.5,
       //     },
-      //     distinctions:
-      //     [
-      //         { type: 'awwwards', x: 3.95, y: 4.15 },
-      //         { type: 'fwa', x: 5.6, y: 4.15 },
-      //         { type: 'cssda', x: 7.2, y: 4.15 }
-      //     ]
+      //   },
+      //   distinctions: [
+      //     { type: "awwwards", x: 3.95, y: 4.15 },
+      //     { type: "fwa", x: 5.6, y: 4.15 },
+      //     { type: "cssda", x: 7.2, y: 4.15 },
+      //   ],
       // },
       // {
       //     name: 'priorHoldings',
@@ -285,33 +306,6 @@ export default class ProjectsSection {
       //     ]
       // },
 
-      // {
-      //     name: 'citrixRedbull',
-      //     imageSources:
-      //     [
-      //         './models/projects/citrixRedbull/slideA.jpg',
-      //         './models/projects/citrixRedbull/slideB.jpg',
-      //         './models/projects/citrixRedbull/slideC.jpg'
-      //     ],
-      //     floorTexture: this.resources.items.projectsCitrixRedbullFloorTexture,
-      //     link:
-      //     {
-      //         href: 'https://thenewmobileworkforce.imm-g-prod.com/',
-      //         x: - 4.8,
-      //         y: - 4.4,
-      //         halfExtents:
-      //         {
-      //             x: 3.2,
-      //             y: 1.5
-      //         }
-      //     },
-      //     distinctions:
-      //     [
-      //         { type: 'awwwards', x: 3.95, y: 4.15 },
-      //         { type: 'fwa', x: 5.6, y: 4.15 },
-      //         { type: 'cssda', x: 7.2, y: 4.15 }
-      //     ]
-      // },
       // {
       //     name: 'gleecChat',
       //     imageSources:
