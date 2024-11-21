@@ -1,4 +1,4 @@
-# Folio 2019
+# Folio 
 
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
