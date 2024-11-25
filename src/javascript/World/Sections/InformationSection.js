@@ -173,22 +173,22 @@ export default class InformationSection {
     // Set up
     this.activities = {};
     this.activities.x = this.x + 0;
-    this.activities.y = this.y - 10;
+    this.activities.y = this.y - 15;
     this.activities.multiplier = 5.5;
-
+  
     // Geometry
     this.activities.geometry = new THREE.PlaneGeometry(
       2 * this.activities.multiplier,
-      1 * this.activities.multiplier,
+      3 * this.activities.multiplier,
       1,
       1
     );
-
+  
     // Texture
     this.activities.texture = this.resources.items.informationActivitiesTexture;
     this.activities.texture.magFilter = THREE.NearestFilter;
     this.activities.texture.minFilter = THREE.LinearFilter;
-
+  
     // Material
     this.activities.material = new THREE.MeshBasicMaterial({
       wireframe: false,
@@ -196,7 +196,7 @@ export default class InformationSection {
       alphaMap: this.activities.texture,
       transparent: true,
     });
-
+  
     // Mesh
     this.activities.mesh = new THREE.Mesh(
       this.activities.geometry,
@@ -207,7 +207,22 @@ export default class InformationSection {
     this.activities.mesh.matrixAutoUpdate = false;
     this.activities.mesh.updateMatrix();
     this.container.add(this.activities.mesh);
+  
+    // Add interaction area for the activity
+    this.activities.area = this.areas.add({
+      position: new THREE.Vector2(this.activities.x, this.activities.y-9),
+      halfExtents: new THREE.Vector2(
+        this.activities.multiplier*0.5,
+        this.activities.multiplier*0.1
+      ),
+    });
+  
+    // Interaction callback
+    this.activities.area.on("interact", () => {
+      window.open("https://github.com/sh200122/resume", "_blank"); // Replace with your URL
+    });
   }
+  
 
   setTiles() {
     this.tiles.add({

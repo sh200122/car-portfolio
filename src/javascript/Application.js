@@ -17,43 +17,45 @@ import GlowsPass from './Passes/Glows.js'
 export default class Application
 {
     /**
-     * Constructor
+     * 构造函数
      */
     constructor(_options)
     {
-        // Options
+        // 选项
         this.$canvas = _options.$canvas
 
-        // Set up
-        this.time = new Time()
-        this.sizes = new Sizes()
-        this.resources = new Resources()
+        // 初始化
+        this.time = new Time() // 时间管理器
+        this.sizes = new Sizes() // 尺寸管理
+        this.resources = new Resources() // 资源管理
 
-        this.setConfig()
-        this.setDebug()
-        this.setRenderer()
-        this.setCamera()
-        this.setPasses()
-        this.setWorld()
-        this.setTitle()
-        this.setThreejsJourney()
+        this.setConfig() // 配置设置
+        this.setDebug() // 调试设置
+        this.setRenderer() // 渲染器设置
+        this.setCamera() // 摄像机设置
+        this.setPasses() // 后处理设置
+        this.setWorld() // 场景世界设置
+        this.setTitle() // 动态标题设置
+        this.setThreejsJourney() // Three.js交互设置
     }
 
     /**
-     * Set config
+     * 设置配置
      */
     setConfig()
     {
         this.config = {}
-        this.config.debug = window.location.hash === '#debug'
-        this.config.cyberTruck = window.location.hash === '#cybertruck'
-        this.config.touch = false
+        this.config.debug = window.location.hash === '#debug' // 是否启用调试模式
+        this.config.cyberTruck = window.location.hash === '#cybertruck' // 是否启用赛博卡车模型
+        this.config.touch = false // 触摸模式标志
 
+        // 监听触摸事件
         window.addEventListener('touchstart', () =>
         {
             this.config.touch = true
-            this.world.controls.setTouch()
+            this.world.controls.setTouch() // 启用触摸控制
 
+            // 调整模糊效果强度
             this.passes.horizontalBlurPass.strength = 1
             this.passes.horizontalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(this.passes.horizontalBlurPass.strength, 0)
             this.passes.verticalBlurPass.strength = 1
@@ -62,38 +64,36 @@ export default class Application
     }
 
     /**
-     * Set debug
+     * 设置调试工具
      */
     setDebug()
     {
         if(this.config.debug)
         {
-            this.debug = new dat.GUI({ width: 420 })
+            this.debug = new dat.GUI({ width: 420 }) // 调试面板
         }
     }
 
     /**
-     * Set renderer
+     * 设置渲染器
      */
     setRenderer()
     {
-        // Scene
+        // 创建场景
         this.scene = new THREE.Scene()
 
-        // Renderer
+        // 初始化渲染器
         this.renderer = new THREE.WebGLRenderer({
-            canvas: this.$canvas,
-            alpha: true,
-            powerPreference: 'high-performance'
+            canvas: this.$canvas, // 绑定的画布
+            alpha: true, // 启用透明背景
+            powerPreference: 'high-performance' // 优先使用高性能模式
         })
-        // this.renderer.setClearColor(0x414141, 1)
-        this.renderer.setClearColor(0x000000, 1)
-        // this.renderer.setPixelRatio(Math.min(Math.max(window.devicePixelRatio, 1.5), 2))
-        this.renderer.setPixelRatio(2)
-        this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
-        this.renderer.autoClear = false
+        this.renderer.setClearColor(0x000000, 1) // 设置背景颜色为黑色
+        this.renderer.setPixelRatio(2) // 设置像素比
+        this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height) // 设置渲染尺寸
+        this.renderer.autoClear = false // 禁用自动清除渲染
 
-        // Resize event
+        // 响应窗口大小调整
         this.sizes.on('resize', () =>
         {
             this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
@@ -101,7 +101,7 @@ export default class Application
     }
 
     /**
-     * Set camera
+     * 设置摄像机
      */
     setCamera()
     {
@@ -113,10 +113,11 @@ export default class Application
             config: this.config
         })
 
-        this.scene.add(this.camera.container)
+        this.scene.add(this.camera.container) // 将摄像机添加到场景
 
         this.time.on('tick', () =>
         {
+            // 如果世界中存在车辆，则设置摄像机目标为车辆位置
             if(this.world && this.world.car)
             {
                 this.camera.target.x = this.world.car.chassis.object.position.x
@@ -125,54 +126,60 @@ export default class Application
         })
     }
 
+    /**
+     * 设置后处理效果
+     */
     setPasses()
     {
         this.passes = {}
 
-        // Debug
+        // 调试工具
         if(this.debug)
         {
-            this.passes.debugFolder = this.debug.addFolder('postprocess')
-            // this.passes.debugFolder.open()
+            this.passes.debugFolder = this.debug.addFolder('postprocess') // 后处理调试文件夹
         }
 
+        // 创建后处理器
         this.passes.composer = new EffectComposer(this.renderer)
 
-        // Create passes
+        // 渲染通道
         this.passes.renderPass = new RenderPass(this.scene, this.camera.instance)
 
+        // 水平方向模糊效果
         this.passes.horizontalBlurPass = new ShaderPass(BlurPass)
         this.passes.horizontalBlurPass.strength = this.config.touch ? 0 : 1
         this.passes.horizontalBlurPass.material.uniforms.uResolution.value = new THREE.Vector2(this.sizes.viewport.width, this.sizes.viewport.height)
         this.passes.horizontalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(this.passes.horizontalBlurPass.strength, 0)
 
+        // 垂直方向模糊效果
         this.passes.verticalBlurPass = new ShaderPass(BlurPass)
         this.passes.verticalBlurPass.strength = this.config.touch ? 0 : 1
         this.passes.verticalBlurPass.material.uniforms.uResolution.value = new THREE.Vector2(this.sizes.viewport.width, this.sizes.viewport.height)
         this.passes.verticalBlurPass.material.uniforms.uStrength.value = new THREE.Vector2(0, this.passes.verticalBlurPass.strength)
 
-        // Debug
+        // 调试模糊效果
         if(this.debug)
         {
-            const folder = this.passes.debugFolder.addFolder('blur')
+            const folder = this.passes.debugFolder.addFolder('blur') // 模糊调试文件夹
             folder.open()
 
             folder.add(this.passes.horizontalBlurPass.material.uniforms.uStrength.value, 'x').step(0.001).min(0).max(10)
             folder.add(this.passes.verticalBlurPass.material.uniforms.uStrength.value, 'y').step(0.001).min(0).max(10)
         }
 
+        // 发光效果
         this.passes.glowsPass = new ShaderPass(GlowsPass)
-        this.passes.glowsPass.color = '#ffcfe0'
-        this.passes.glowsPass.material.uniforms.uPosition.value = new THREE.Vector2(0, 0.25)
-        this.passes.glowsPass.material.uniforms.uRadius.value = 0.7
+        this.passes.glowsPass.color = '#ffcfe0' // 发光颜色
+        this.passes.glowsPass.material.uniforms.uPosition.value = new THREE.Vector2(0, 0.25) // 发光位置
+        this.passes.glowsPass.material.uniforms.uRadius.value = 0.7 // 发光半径
         this.passes.glowsPass.material.uniforms.uColor.value = new THREE.Color(this.passes.glowsPass.color)
         this.passes.glowsPass.material.uniforms.uColor.value.convertLinearToSRGB()
-        this.passes.glowsPass.material.uniforms.uAlpha.value = 0.55
+        this.passes.glowsPass.material.uniforms.uAlpha.value = 0.55 // 发光透明度
 
-        // Debug
+        // 调试发光效果
         if(this.debug)
         {
-            const folder = this.passes.debugFolder.addFolder('glows')
+            const folder = this.passes.debugFolder.addFolder('glows') // 发光调试文件夹
             folder.open()
 
             folder.add(this.passes.glowsPass.material.uniforms.uPosition.value, 'x').step(0.001).min(- 1).max(2).name('positionX')
@@ -185,25 +192,24 @@ export default class Application
             folder.add(this.passes.glowsPass.material.uniforms.uAlpha, 'value').step(0.001).min(0).max(1).name('alpha')
         }
 
-        // Add passes
+        // 添加后处理效果
         this.passes.composer.addPass(this.passes.renderPass)
         this.passes.composer.addPass(this.passes.horizontalBlurPass)
         this.passes.composer.addPass(this.passes.verticalBlurPass)
         this.passes.composer.addPass(this.passes.glowsPass)
 
-        // Time tick
+        // 每帧渲染
         this.time.on('tick', () =>
         {
+            // 根据模糊强度启用或禁用模糊效果
             this.passes.horizontalBlurPass.enabled = this.passes.horizontalBlurPass.material.uniforms.uStrength.value.x > 0
             this.passes.verticalBlurPass.enabled = this.passes.verticalBlurPass.material.uniforms.uStrength.value.y > 0
 
-            // Renderer
+            // 渲染后处理
             this.passes.composer.render()
-            // this.renderer.domElement.style.background = 'black'
-            // this.renderer.render(this.scene, this.camera.instance)
         })
 
-        // Resize event
+        // 响应窗口调整大小
         this.sizes.on('resize', () =>
         {
             this.renderer.setSize(this.sizes.viewport.width, this.sizes.viewport.height)
@@ -216,7 +222,7 @@ export default class Application
     }
 
     /**
-     * Set world
+     * 设置场景世界
      */
     setWorld()
     {
@@ -235,17 +241,18 @@ export default class Application
     }
 
     /**
-     * Set title
+     * 设置动态标题
      */
     setTitle()
     {
         this.title = {}
-        this.title.frequency = 300
-        this.title.width = 20
-        this.title.position = 0
-        this.title.$element = document.querySelector('title')
-        this.title.absolutePosition = Math.round(this.title.width * 0.25)
+        this.title.frequency = 300 // 更新频率
+        this.title.width = 20 // 标题宽度
+        this.title.position = 0 // 当前位置
+        this.title.$element = document.querySelector('title') // 标题元素
+        this.title.absolutePosition = Math.round(this.title.width * 0.25) // 初始绝对位置
 
+        // 每帧更新标题位置
         this.time.on('tick', () =>
         {
             if(this.world.physics)
@@ -259,6 +266,7 @@ export default class Application
             }
         })
 
+        // 定时更新标题内容
         window.setInterval(() =>
         {
             this.title.position = Math.round(this.title.absolutePosition % this.title.width)
@@ -268,7 +276,7 @@ export default class Application
     }
 
     /**
-     * Set Three.js Journey
+     * 设置Three.js交互模块
      */
     setThreejsJourney()
     {
@@ -280,15 +288,15 @@ export default class Application
     }
 
     /**
-     * Destructor
+     * 销毁函数
      */
     destructor()
     {
-        this.time.off('tick')
-        this.sizes.off('resize')
+        this.time.off('tick') // 移除时间监听
+        this.sizes.off('resize') // 移除尺寸监听
 
-        this.camera.orbitControls.dispose()
-        this.renderer.dispose()
-        this.debug.destroy()
+        this.camera.orbitControls.dispose() // 释放摄像机控制
+        this.renderer.dispose() // 释放渲染器资源
+        this.debug.destroy() // 销毁调试工具
     }
 }

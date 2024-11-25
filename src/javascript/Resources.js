@@ -6,15 +6,15 @@ export default class Resources extends EventEmitter {
   constructor() {
     super();
 
-    this.loader = new Loader();
-    this.items = {};
+    this.loader = new Loader(); // 初始化加载器
+    this.items = {}; // 存储加载的资源
 
     this.loader.load([
-      // Matcaps
+      // Matcaps 材质贴图
       {
         name: "matcapBeige",
         source: "./models/matcaps/beige.png",
-        type: "texture",
+        type: "texture", // 纹理类型
       },
       {
         name: "matcapBlack",
@@ -76,7 +76,7 @@ export default class Resources extends EventEmitter {
         source: "./models/matcaps/metal.png",
         type: "texture",
       },
-      // Intro
+      // Intro 场景资源
       { name: "introStaticBase", source: "./models/intro/static/base.glb" },
       {
         name: "introStaticCollision",
@@ -131,7 +131,7 @@ export default class Resources extends EventEmitter {
         source: "./models/crossroads/static/floorShadow.png",
         type: "texture",
       },
-      // Car default
+      // Car default 默认汽车模型
       { name: "carDefaultChassis", source: "./models/car/default/chassis.glb" },
       { name: "carDefaultWheel", source: "./models/car/default/wheel.glb" },
       {
@@ -143,7 +143,7 @@ export default class Resources extends EventEmitter {
         source: "./models/car/default/backLightsReverse.glb",
       },
       { name: "carDefaultAntena", source: "./models/car/default/antena.glb" },
-      // Car CyberTruck
+      // Car CyberTruck 赛博卡车模型
       {
         name: "carCyberTruckChassis",
         source: "./models/car/cyberTruck/chassis.glb",
@@ -164,7 +164,7 @@ export default class Resources extends EventEmitter {
         name: "carCyberTruckAntena",
         source: "./models/car/cyberTruck/antena.glb",
       },
-      // Project
+      // Project 项目相关资源
       {
         name: "projectsBoardStructure",
         source: "./models/projects/board/structure.glb",
@@ -227,7 +227,7 @@ export default class Resources extends EventEmitter {
         source: "./models/projects/orano/5.png",
         type: "texture",
       },
-      // Information
+      // Information 信息面板资源
       {
         name: "informationStaticBase",
         source: "./models/information/static/base.glb",
@@ -274,7 +274,7 @@ export default class Resources extends EventEmitter {
         source: "./models/information/static/activities.png",
         type: "texture",
       },
-      // Playground
+      // Playground 操作场地资源
       {
         name: "playgroundStaticBase",
         source: "./models/playground/static/base.glb",
@@ -288,34 +288,34 @@ export default class Resources extends EventEmitter {
         source: "./models/playground/static/floorShadow.png",
         type: "texture",
       },
-      // Brick
+      // Brick 砖块资源
       { name: "brickBase", source: "./models/brick/base.glb" },
       { name: "brickCollision", source: "./models/brick/collision.glb" },
-      // Horn
+      // Horn 喇叭资源
       { name: "hornBase", source: "./models/horn/base.glb" },
       { name: "hornCollision", source: "./models/horn/collision.glb" },
-      // Webby trophy
+      // Webby trophy 奖杯资源
       { name: "webbyTrophyBase", source: "./models/webbyTrophy/base.glb" },
       {
         name: "webbyTrophyCollision",
         source: "./models/webbyTrophy/collision.glb",
       },
-      // Lemon
+      // Lemon 柠檬资源
       { name: "lemonBase", source: "./models/lemon/base.glb" },
       { name: "lemonCollision", source: "./models/lemon/collision.glb" },
-      // Bownling ball
+      // Bowling ball 保龄球资源
       { name: "bowlingBallBase", source: "./models/bowlingBall/base.glb" },
       {
         name: "bowlingBallCollision",
         source: "./models/bowlingBall/collision.glb",
       },
-      // Bownling pin
+      // Bowling pin 保龄球瓶资源
       { name: "bowlingPinBase", source: "./models/bowlingPin/base.glb" },
       {
         name: "bowlingPinCollision",
         source: "./models/bowlingPin/collision.glb",
       },
-      // Areas
+      // Areas 区域资源
       {
         name: "areaKeyEnter",
         source: "./models/area/keyEnter.png",
@@ -329,7 +329,7 @@ export default class Resources extends EventEmitter {
         source: "./models/area/questionMark.png",
         type: "texture",
       },
-      // Tiles
+      // Tiles 瓦片资源
       { name: "tilesABase", source: "./models/tiles/a/base.glb" },
       { name: "tilesACollision", source: "./models/tiles/a/collision.glb" },
       { name: "tilesBBase", source: "./models/tiles/b/base.glb" },
@@ -340,7 +340,7 @@ export default class Resources extends EventEmitter {
       { name: "tilesDCollision", source: "./models/tiles/d/collision.glb" },
       { name: "tilesEBase", source: "./models/tiles/e/base.glb" },
       { name: "tilesECollision", source: "./models/tiles/e/collision.glb" },
-      // Konami
+      // Konami 彩蛋资源
       {
         name: "konamiLabel",
         source: "./models/konami/label.png",
@@ -351,7 +351,7 @@ export default class Resources extends EventEmitter {
         source: "./models/konami/label-touch.png",
         type: "texture",
       },
-      // Wigs
+      // Wigs 假发资源
       { name: "wig1", source: "./models/wigs/wig1.glb" },
       { name: "wig2", source: "./models/wigs/wig2.glb" },
       { name: "wig3", source: "./models/wigs/wig3.glb" },
@@ -359,22 +359,22 @@ export default class Resources extends EventEmitter {
     ]);
 
     this.loader.on("fileEnd", (_resource, _data) => {
-      this.items[_resource.name] = _data;
+      this.items[_resource.name] = _data; // 存储加载完成的资源
 
-      // Texture
+      // 如果是纹理类型，创建Three.js纹理对象
       if (_resource.type === "texture") {
         const texture = new THREE.Texture(_data);
         texture.needsUpdate = true;
 
-        this.items[`${_resource.name}Texture`] = texture;
+        this.items[`${_resource.name}Texture`] = texture; // 将纹理对象存储到资源中
       }
 
-      // Trigger progress
+      // 触发加载进度事件
       this.trigger("progress", [this.loader.loaded / this.loader.toLoad]);
     });
 
     this.loader.on("end", () => {
-      // Trigger ready
+      // 触发加载完成事件
       this.trigger("ready");
     });
   }

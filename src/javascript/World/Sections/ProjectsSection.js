@@ -175,7 +175,7 @@ export default class ProjectsSection {
         link: {
           href: "https://mappin-6au.pages.dev/",
           x: -4.8,
-          y: -2,
+          y: -3,
           halfExtents: {
             x: 3.2,
             y: 1.5,
@@ -207,29 +207,29 @@ export default class ProjectsSection {
           { type: "cssda", x: 7.2, y: 4.15 },
         ],
       },
-      {
-        name: "Luni.app",
-        imageSources: [
-          "./models/projects/luni/jvke1.png",
-          "./models/projects/luni/jvke2.png",
-          "./models/projects/luni/jvke3.png",
-          "./models/projects/luni/jvke4.png",
-        ],
-        floorTexture: this.resources.items.projectsLuniFloorTexture,
-        link: {
-          href: "#",
-          x: -4.8,
-          y: -3,
-          halfExtents: {
-            x: 3.2,
-            y: 1.5,
-          },
-        },
-        distinctions: [
-          { type: "awwwards", x: 3.95, y: 4.15 },
-          { type: "fwa", x: 5.6, y: 4.15 },
-        ],
-      },
+      // {
+      //   name: "Luni.app",
+      //   imageSources: [
+      //     "./models/projects/luni/jvke1.png",
+      //     "./models/projects/luni/jvke2.png",
+      //     "./models/projects/luni/jvke3.png",
+      //     "./models/projects/luni/jvke4.png",
+      //   ],
+      //   floorTexture: this.resources.items.projectsLuniFloorTexture,
+      //   link: {
+      //     href: "https://github.com/sh200122/practice",
+      //     x: .8,
+      //     y: -3,
+      //     halfExtents: {
+      //       x: 3.2,
+      //       y: 1.5,
+      //     },
+      //   },
+      //   distinctions: [
+      //     { type: "awwwards", x: 3.95, y: 4.15 },
+      //     { type: "fwa", x: 5.6, y: 4.15 },
+      //   ],
+      // },
       {
         name: "Bonhomme | 10 ans",
         imageSources: [
@@ -241,8 +241,8 @@ export default class ProjectsSection {
         floorTexture: this.resources.items.projectsBonhomme10ansFloorTexture,
         link: {
           href: "https://github.com/sh200122",
-          x: -4.8,
-          y: -2,
+          x: .8,
+          y: -3,
           halfExtents: {
             x: 3.2,
             y: 1.5,
